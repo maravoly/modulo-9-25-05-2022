@@ -2,7 +2,6 @@
   <% if tv_show.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(tv_show.errors.count, "error") %> prohibited this tv_show from being saved:</h2>
-
       <ul>
         <% tv_show.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,26 +10,46 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
 
-  <div class="field">
-    <%= form.label :summary %>
-    <%= form.text_area :summary %>
-  </div>
+<div class="container">
+    <form class="form-horizontal" action="/action_page.php">
+        <div class="form-group">
+          <%= form.label :name, :class=>"cl control-label col-sm-2" %>
+          <%= form.text_field :name, :class=>"fondo" %><br>
+            
+          <%= form.label :summary, :class=>"cl control-label col-sm-2" %>
+          <%= form.text_area :summary, :class=>"fondo"  %><br>
 
-  <div class="field">
-    <%= form.label :release_date %>
-    <%= form.datetime_select :release_date %>
-  </div>
+          <%= form.label :release_date, :class=>"cl control-label col-sm-2" %>
+          <%= form.date_select :release_date, :class=>"fondo"  %><br>
+    
+          <%= form.label :rating, :class=>"cl control-label col-sm-2" %>
+          <%= form.text_field :rating, :class=>"fondo"  %><br>
+          
+          <div class= "cl text-justify">
+          <%= collection_select(:tv_show, :nationality_id, Nationality.all, :id, :name, prompt: true) %><br>
+          </div>
+        </div>
+  </form>  
+</div>
 
-  <div class="field">
-    <%= form.label :rating %>
-    <%= form.text_field :rating %>
-  </div>
+<div class="container">
+    <fieldset style="width:700px; higth:100px">
+      <legend class="titulo">Film locations</legend>
+      <ul class="form-check-input">
+          <%= form.fields_for :film_locations do |film_locations_form| %>
+            <li>
+              <%= film_locations_form.label :name, :class=>"cl control-label col-sm-2"%>
+              <%= film_locations_form.text_field :name, :class=>"fondo" %><br>
 
+              <%= film_locations_form.label :indoor, :class=>"cl control-label col-sm-2" %>
+              <%= film_locations_form.check_box :indoor, :class=>"fondo checkbox" %>
+            </li>
+          <% end %>
+      </ul>
+    </fieldset>
+</div> 
+  <br><br><br><br> <br><br><br><br><br><br><br>
   <div class="actions">
     <%= form.submit %>
   </div>

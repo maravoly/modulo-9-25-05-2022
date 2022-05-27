@@ -1,11 +1,6 @@
 <br><br><br><br><br>
-
-
 <p id="notice"><%= notice %></p>
-
 <h1 class="titulo">Tv Shows</h1>
-
-
 <table>
   <thead class="table-dark text-center">
     <tr>
@@ -13,10 +8,10 @@
       <th >Summary</th>
       <th >Release date</th>
       <th >Rating</th>
+      <th >Nacionality</th>
       <th ></th>
     </tr>
   </thead>
-
   <tbody class="table table-info table-bordered table">
     <% @tv_shows.each do |tv_show| %>
       <tr>
@@ -24,6 +19,7 @@
         <td><%= tv_show.summary %></td>      
         <td><%= tv_show.release_date %></td>     
         <td><%= tv_show.rating %></td>     
+        <td><%= image_tag(url_for(tv_show.nationality.flag_img)) %></td>
         <td class="btn btn-1"><%= link_to 'Show', tv_show %></td>      
         <td class="btn btn-2"><%= link_to 'Edit', edit_tv_show_path(tv_show) %></td>
         <td class="btn btn-3"><%= link_to 'Destroy', tv_show, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -31,9 +27,10 @@
     <% end %>
   </tbody>
 </table>
-
 <br>
+<%= link_to 'New Tv Show', new_tv_show_path, class: "btn btn-3" %>
 
-<%= link_to 'New Tv Show', new_tv_show_path %>
+
+
 
 
